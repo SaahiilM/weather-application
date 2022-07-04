@@ -2,11 +2,15 @@ import React from "react";
 import { FaSearchLocation } from "react-icons/fa";
 import { BiCurrentLocation } from "react-icons/bi";
 // import { TbTemperatureCelsius, TbTemperatureFahrenheit } from "react-icons/tb";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const UserInput = ({ setQuery, units, setUnits }) => {
   const [city, setCity] = useState("");
+  const searchInput = useRef(null);
 
+  useEffect(() => {
+    searchInput.current.focus();
+  }, []);
   const handleSearch = () => {
     if (city !== "") {
       setQuery({ q: city });
@@ -42,6 +46,7 @@ const UserInput = ({ setQuery, units, setUnits }) => {
           className="text-xl font-light p-2 w-full shadow-xl focus:outline-stone-700 capitalize rounded-lg bg-transparent"
           placeholder="Search city..."
           value={city}
+          ref={searchInput}
           onChange={(e) => setCity(e.currentTarget.value)}
         />
         <FaSearchLocation
@@ -51,7 +56,7 @@ const UserInput = ({ setQuery, units, setUnits }) => {
         />
         <BiCurrentLocation
           size={25}
-          className=" cursor-pointer transition ease-out hover:scale-125 focus:bg-red-500"
+          className=" cursor-pointer transition ease-out hover:scale-125 hover:text-red-500"
           onClick={handleCurrentLocation}
         />
       </div>

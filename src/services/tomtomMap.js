@@ -4,7 +4,7 @@ import tt from "@tomtom-international/web-sdk-maps";
 import React, { useRef, useState, useEffect } from "react";
 const API_KEY = "8n0WF3i7x5ikVvGR4TLXjoP7xvwGlEAW";
 const WEATHER_API = "f4f34b9e6fe5b364b6f00b5099d98f93";
-const MAX_ZOOM = 17;
+// const MAX_ZOOM = 17;
 const MapTom = () => {
   const mapElement = useRef();
   const [mapLongitude, setMapLongitude] = useState(-121.91599);
@@ -12,17 +12,17 @@ const MapTom = () => {
   const [mapZoom, setMapZoom] = useState(13);
   const [map, setMap] = useState({});
 
-  const increaseZoom = () => {
-    if (mapZoom < MAX_ZOOM) {
-      setMapZoom(mapZoom + 1);
-    }
-  };
+  // const increaseZoom = () => {
+  //   if (mapZoom < MAX_ZOOM) {
+  //     setMapZoom(mapZoom + 1);
+  //   }
+  // };
 
-  const decreaseZoom = () => {
-    if (mapZoom > 1) {
-      setMapZoom(mapZoom - 1);
-    }
-  };
+  // const decreaseZoom = () => {
+  //   if (mapZoom > 1) {
+  //     setMapZoom(mapZoom - 1);
+  //   }
+  // };
 
   var cloudSource = {
     type: "raster",
@@ -98,14 +98,14 @@ const MapTom = () => {
     return () => map.remove();
   }, []);
 
-  const updateMap = () => {
-    map.setCenter([parseFloat(mapLongitude), parseFloat(mapLatitude)]);
-    map.setMapZoom(mapZoom);
-  };
+  // const updateMap = () => {
+  //   map.setCenter([parseFloat(mapLongitude), parseFloat(mapLatitude)]);
+  //   map.setMapZoom(mapZoom);
+  // };
 
   return (
     <div className=" my-6">
-      <div ref={mapElement} className=" h-[400px]" />
+      <div ref={mapElement} className=" h-[400px] rounded-lg" />
     </div>
   );
 };
