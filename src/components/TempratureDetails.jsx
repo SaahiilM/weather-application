@@ -27,7 +27,7 @@ const TempDetails = ({
         <div className="flex flex-row items-center gap-4 md:gap-16 ">
           <div className="flex flex-col  pt-8 pb-0 mr-4">
             <div className=" flex flex-row items-center pb-0">
-              <img src={iconURLFrom(icon)} alt="" className="w-20" />
+              <img src={iconURLFrom(icon)} alt="" className="w-22" />
 
               <p className="text-5xl">{`${temp.toFixed()}°`}</p>
             </div>

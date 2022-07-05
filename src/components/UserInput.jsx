@@ -71,7 +71,7 @@ const UserInput = ({ setQuery, units, setUnits }) => {
       <div className="flex flex-row w-1/4 items-center justify-center">
         <button
           name="metric"
-          className="text-xl  font-light hover:scale-125 transition ease-out focus:text-blue-600"
+          className="text-xl  font-light hover:scale-125 transition ease-out focus:text-blue-600 hover:text-blue-500"
           onClick={handleUnitChange}
         >
           {/* <TbTemperatureCelsius size={25} /> */}

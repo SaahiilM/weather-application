@@ -8,11 +8,11 @@ const WEATHER_API_KEY = "f4f34b9e6fe5b364b6f00b5099d98f93";
 const MapTom = ({ latLong: { lng, lat } }) => {
   const mapElement = useRef();
   // eslint-disable-next-line no-unused-vars
-  const [mapLongitude, setMapLongitude] = useState(-121.91599);
+  const [mapLongitude, setMapLongitude] = useState(-73.935242);
   // eslint-disable-next-line no-unused-vars
-  const [mapLatitude, setMapLatitude] = useState(37.36765);
+  const [mapLatitude, setMapLatitude] = useState(40.73061);
   // eslint-disable-next-line no-unused-vars
-  const [mapZoom, setMapZoom] = useState(6);
+  const [mapZoom, setMapZoom] = useState(4);
   // eslint-disable-next-line no-unused-vars
   const [map, setMap] = useState({});
 
