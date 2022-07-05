@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Forecast from "./components/Forecast";
-import TempDetails from "./components/TempDetails";
+import TempDetails from "./components/TempratureDetails";
 import TimeAndLocation from "./components/TimeAndLocation";
 import UserInput from "./components/UserInput";
 import getformattedWeatherData, {
