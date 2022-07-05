@@ -3,70 +3,44 @@ import tt from "@tomtom-international/web-sdk-maps";
 
 import React, { useRef, useState, useEffect } from "react";
 const API_KEY = "8n0WF3i7x5ikVvGR4TLXjoP7xvwGlEAW";
-const WEATHER_API = "f4f34b9e6fe5b364b6f00b5099d98f93";
-// const MAX_ZOOM = 17;
-const MapTom = () => {
+const WEATHER_API_KEY = "f4f34b9e6fe5b364b6f00b5099d98f93";
+
+const MapTom = ({ latLong: { lng, lat } }) => {
   const mapElement = useRef();
   // eslint-disable-next-line no-unused-vars
   const [mapLongitude, setMapLongitude] = useState(-121.91599);
   // eslint-disable-next-line no-unused-vars
   const [mapLatitude, setMapLatitude] = useState(37.36765);
   // eslint-disable-next-line no-unused-vars
-  const [mapZoom, setMapZoom] = useState(13);
+  const [mapZoom, setMapZoom] = useState(6);
   // eslint-disable-next-line no-unused-vars
   const [map, setMap] = useState({});
 
-  // const increaseZoom = () => {
-  //   if (mapZoom < MAX_ZOOM) {
-  //     setMapZoom(mapZoom + 1);
-  //   }
-  // };
-
-  // const decreaseZoom = () => {
-  //   if (mapZoom > 1) {
-  //     setMapZoom(mapZoom - 1);
-  //   }
-  // };
+  const sourceObject = (layerType) => {
+    return {
+      type: "raster",
+      tiles: [
+        `https://tile.openweathermap.org/map/${layerType}/{z}/{x}/{y}.png?appid=${WEATHER_API_KEY}`,
+      ],
+      tileSize: 256,
+      minZoom: 0,
+      maxZoom: 12,
+      attribution: "OpenWeatherMap.org",
+    };
+  };
 
   useEffect(() => {
-    let map = tt.map({
+    const map = tt.map({
       key: API_KEY,
       container: mapElement.current,
       center: [mapLongitude, mapLatitude],
       zoom: mapZoom,
     });
-    let cloudSource = {
-      type: "raster",
-      tiles: [
-        `https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${WEATHER_API}`,
-      ],
-      tileSize: 256,
-      minZoom: 0,
-      maxZoom: 12,
-      attribution: "OpenWeatherMap.org",
-    };
+    const cloudSource = sourceObject("clouds_new");
 
-    let rainSource = {
-      type: "raster",
-      tiles: [
-        `https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${WEATHER_API}`,
-      ],
-      tileSize: 256,
-      minZoom: 0,
-      maxZoom: 12,
-      attribution: "OpenWeatherMap.org",
-    };
+    const rainSource = sourceObject("precipitation_new");
 
-    let tempSource = {
-      type: "raster",
-      tiles: [
-        `https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${WEATHER_API}`,
-      ],
-      tileSize: 256,
-      minZoom: 0,
-      maxZoom: 12,
-      attribution: "OpenWeatherMap.org",
-    };
+    const tempSource = sourceObject("temp_new");
 
     let cloudLayer = {
       id: "cloud_layer",
@@ -89,7 +63,6 @@ const MapTom = () => {
       layout: { visibility: "visible" },
     };
 
-    setMap(map);
     map.on("load", () => {
       map.addSource("cloud_source", cloudSource);
       map.addLayer(cloudLayer);
@@ -99,15 +72,11 @@ const MapTom = () => {
       map.addLayer(tempLayer);
     });
     return () => map.remove();
-  }, [mapLatitude, mapLongitude, mapZoom]);
-
-  // const updateMap = () => {
-  //   map.setCenter([parseFloat(mapLongitude), parseFloat(mapLatitude)]);
-  //   map.setMapZoom(mapZoom);
-  // };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapLatitude, mapLongitude]);
 
   return (
-    <div className=" my-6">
+    <div className=" my-6 rounded-lg">
       <div ref={mapElement} className=" h-[400px] rounded-lg" />
     </div>
   );

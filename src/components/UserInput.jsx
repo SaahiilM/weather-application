@@ -1,7 +1,6 @@
 import React from "react";
 import { FaSearchLocation } from "react-icons/fa";
 import { BiCurrentLocation } from "react-icons/bi";
-// import { TbTemperatureCelsius, TbTemperatureFahrenheit } from "react-icons/tb";
 import { useState, useRef, useEffect } from "react";
 
 const UserInput = ({ setQuery, units, setUnits }) => {
@@ -15,7 +14,6 @@ const UserInput = ({ setQuery, units, setUnits }) => {
     if (city !== "") {
       setQuery({ q: city });
     }
-    console.log(city);
   };
 
   const handleCurrentLocation = () => {

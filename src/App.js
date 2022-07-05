@@ -23,7 +23,6 @@ const App = () => {
     fetchWeather();
     askLocationPermission();
   }, [query, units]);
-  console.log(query);
   const BGURL = "https://cdn.wallpapersafari.com/38/22/skoMHd.jpg";
 
   return (

@@ -24,7 +24,6 @@ const getformattedWeatherData = async (serachParams) => {
 const getOpenWeatherData = (info, serachParams) => {
   const url = new URL(BASE_URL + "/" + info);
   url.search = new URLSearchParams({ ...serachParams, appid: WEATHER_API_KEY });
-  console.log(url.href);
   return fetch(url).then((res) => res.json());
 };
 
@@ -90,7 +89,7 @@ const iconURLFrom = (code) => `http://openweathermap.org/img/wn/${code}@2x.png`;
 
 const askLocationPermission = () => {
   if (!navigator.geolocation) {
-    console.log("Ask for permission");
+    alert("Allow location access");
   } else {
     navigator.geolocation.getCurrentPosition((position) => {
       let { longitude, latitude } = position.coords;
