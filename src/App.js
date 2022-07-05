@@ -3,7 +3,9 @@ import Forecast from "./components/Forecast";
 import TempDetails from "./components/TempDetails";
 import TimeAndLocation from "./components/TimeAndLocation";
 import UserInput from "./components/UserInput";
-import getformattedWeatherData from "./services/openweather";
+import getformattedWeatherData, {
+  askLocationPermission,
+} from "./services/openweather";
 import MapTom from "./services/tomtomMap";
 
 const App = () => {
@@ -17,28 +19,18 @@ const App = () => {
         setWeather(data);
       });
     };
+
     fetchWeather();
+    askLocationPermission();
   }, [query, units]);
   console.log(query);
   const BGURL = "https://cdn.wallpapersafari.com/38/22/skoMHd.jpg";
-  // const backgroundFormat = () => {
-  //   if (!weather) {
-  //     return "from-cyan-800 to-blue-600";
-  //   }
-  //   const threshold = units === "metric" ? 20 : 60;
-  //   if (weather.temp <= threshold) {
-  //     return "from-cyan-800 to-blue-500";
-  //   } else {
-  //     return "from-yellow-700 to-orange-700";
-  //   }
-  // };
 
   return (
-    // Background style
     <div
       style={{ backgroundImage: `url(${BGURL})` }}
       className={
-        " bg-fixed bg-center bg-cover m-0 py-3 px-4 items-center justify-center max-w-screen-xl md:px-4 lg:px-24 xl:px-32 mx-auto"
+        " bg-fixed bg-center bg-cover m-0 py-3 px-4 items-center justify-center max-w-screen-xl md:px-4 lg:px-24 xl:px-32 mx-auto scroll-smooth"
       }
     >
       <div className=" text-white font-semibold text-3xl text-center ">
@@ -53,9 +45,9 @@ const App = () => {
           <TempDetails weather={weather} />
           <Forecast title="Hourly Forecast" items={weather.hourly} />
           <Forecast title="Daily Forecast" items={weather.daily} />
+          <MapTom latLong={weather} />
         </div>
       )}
-      <MapTom />
     </div>
   );
 };

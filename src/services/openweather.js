@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-const API_KEY = "f4f34b9e6fe5b364b6f00b5099d98f93";
+const WEATHER_API_KEY = "f4f34b9e6fe5b364b6f00b5099d98f93";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 const getformattedWeatherData = async (serachParams) => {
@@ -23,10 +23,8 @@ const getformattedWeatherData = async (serachParams) => {
 
 const getOpenWeatherData = (info, serachParams) => {
   const url = new URL(BASE_URL + "/" + info);
-  console.log("info ", info);
-  console.log("searchParams ", serachParams);
-  url.search = new URLSearchParams({ ...serachParams, appid: API_KEY });
-  //   console.log(url.href);
+  url.search = new URLSearchParams({ ...serachParams, appid: WEATHER_API_KEY });
+  console.log(url.href);
   return fetch(url).then((res) => res.json());
 };
 
@@ -90,8 +88,17 @@ const formatToLocaleTime = (
 
 const iconURLFrom = (code) => `http://openweathermap.org/img/wn/${code}@2x.png`;
 
+const askLocationPermission = () => {
+  if (!navigator.geolocation) {
+    console.log("Ask for permission");
+  } else {
+    navigator.geolocation.getCurrentPosition((position) => {
+      let { longitude, latitude } = position.coords;
+      return { longitude, latitude };
+    });
+  }
+};
+
 export default getformattedWeatherData;
 
-export { formatToLocaleTime, iconURLFrom };
-
-// export default getOpenWeatherData;
+export { formatToLocaleTime, iconURLFrom, askLocationPermission };
