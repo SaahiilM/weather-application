@@ -1,6 +1,7 @@
 import React from "react";
 import { formatToLocaleTime } from "../services/openweather";
 
+// displays the location and the local time on the top
 const TimeAndLocation = ({ weather: { dt, timezone, name, country } }) => {
   return (
     <div>

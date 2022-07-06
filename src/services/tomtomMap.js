@@ -15,6 +15,7 @@ const MapTom = ({ latLong: { lng, lat } }) => {
   const [mapZoom, setMapZoom] = useState(5);
   // eslint-disable-next-line no-unused-vars
 
+  // this function is responsible for creating layer objects dynamically
   const sourceObject = (layerType) => {
     return {
       type: "raster",
@@ -41,6 +42,7 @@ const MapTom = ({ latLong: { lng, lat } }) => {
 
     const tempSource = sourceObject("temp_new");
 
+    // the following code helps in taking the source a=objects and telling the api to add the respective layer
     let cloudLayer = {
       id: "cloud_layer",
       type: "raster",
@@ -62,6 +64,7 @@ const MapTom = ({ latLong: { lng, lat } }) => {
       layout: { visibility: "visible" },
     };
 
+    // this tells the api to load the layers when the event load is triggered on the map
     map.on("load", () => {
       map.addSource("cloud_source", cloudSource);
       map.addLayer(cloudLayer);

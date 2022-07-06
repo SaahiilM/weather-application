@@ -10,12 +10,15 @@ const UserInput = ({ setQuery, units, setUnits }) => {
   useEffect(() => {
     searchInput.current.focus();
   }, []);
+
+  // handle user input city
   const handleSearch = () => {
     if (city !== "") {
       setQuery({ q: city });
     }
   };
 
+  // handle the request when user selects current location
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) {
       alert("Ask for permission");
@@ -28,6 +31,7 @@ const UserInput = ({ setQuery, units, setUnits }) => {
     }
   };
 
+  //  this handles the temperature unit change
   const handleUnitChange = (e) => {
     const unitSelected = e.currentTarget.name;
 
@@ -74,7 +78,6 @@ const UserInput = ({ setQuery, units, setUnits }) => {
           className="text-xl  font-light hover:scale-125 transition ease-out focus:text-blue-600 hover:text-blue-500"
           onClick={handleUnitChange}
         >
-          {/* <TbTemperatureCelsius size={25} /> */}
           °C
         </button>
         <p className="text-xl  mx-1">&nbsp;|&nbsp;</p>
@@ -84,7 +87,6 @@ const UserInput = ({ setQuery, units, setUnits }) => {
           onClick={handleUnitChange}
         >
           °F
-          {/* <TbTemperatureFahrenheit size={25} /> */}
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { iconURLFrom } from "../services/openweather";
 
+// responsible for displaying the hourly and daily forcast
 const Forecast = ({ title, items }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg text-black px-2 mb-auto pb-2">

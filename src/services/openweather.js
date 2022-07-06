@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 const WEATHER_API_KEY = "f4f34b9e6fe5b364b6f00b5099d98f93";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
+// passing in the sear parameters to fetch weather
 const getformattedWeatherData = async (serachParams) => {
   const formattedCurrentWeather = await getOpenWeatherData(
     "weather",
@@ -21,12 +22,14 @@ const getformattedWeatherData = async (serachParams) => {
   return { ...formattedCurrentWeather, ...formattedForcecastWeather };
 };
 
+// formats the url based on the serach parameters i.e city or longitude and latitude
 const getOpenWeatherData = (info, serachParams) => {
   const url = new URL(BASE_URL + "/" + info);
   url.search = new URLSearchParams({ ...serachParams, appid: WEATHER_API_KEY });
   return fetch(url).then((res) => res.json());
 };
 
+// this is responsible for formatting the json response
 const formatCurrentWeather = (data) => {
   const {
     coord: { lat, lon },
@@ -59,6 +62,7 @@ const formatCurrentWeather = (data) => {
   };
 };
 
+// takes the json response and return the daily and hourly data separately
 const formatForecastWeather = (data) => {
   let { timezone, daily, hourly } = data;
   daily = daily.slice(1, 6).map((eachDaily) => {
@@ -79,6 +83,7 @@ const formatForecastWeather = (data) => {
   return { timezone, daily, hourly };
 };
 
+// format the local time using external library
 const formatToLocaleTime = (
   secs,
   zone,
@@ -87,6 +92,7 @@ const formatToLocaleTime = (
 
 const iconURLFrom = (code) => `http://openweathermap.org/img/wn/${code}@2x.png`;
 
+// this asks for location permission and gets the current longitude and latitude
 const askLocationPermission = () => {
   if (!navigator.geolocation) {
     alert("Allow location access");

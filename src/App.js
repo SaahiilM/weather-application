@@ -3,7 +3,9 @@ import Forecast from "./components/Forecast";
 import TempDetails from "./components/TempratureDetails";
 import TimeAndLocation from "./components/TimeAndLocation";
 import UserInput from "./components/UserInput";
-import getformattedWeatherData from "./services/openweather";
+import getformattedWeatherData, {
+  askLocationPermission,
+} from "./services/openweather";
 import MapTom from "./services/tomtomMap";
 
 const App = () => {
@@ -12,14 +14,15 @@ const App = () => {
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
+    // get data from the weather api
     const fetchWeather = async () => {
       await getformattedWeatherData({ ...query, units }).then((data) => {
         setWeather(data);
       });
     };
 
+    askLocationPermission();
     fetchWeather();
-    // askLocationPermission();
   }, [query, units]);
   const BGURL = "https://cdn.wallpapersafari.com/38/22/skoMHd.jpg";
 
