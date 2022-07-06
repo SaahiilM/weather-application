@@ -21,7 +21,7 @@ const App = () => {
     };
 
     fetchWeather();
-    askLocationPermission();
+    // askLocationPermission();
   }, [query, units]);
   const BGURL = "https://cdn.wallpapersafari.com/38/22/skoMHd.jpg";
 
