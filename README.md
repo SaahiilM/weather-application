@@ -1,4 +1,4 @@
-#Weather Application
+# Weather Application
 
 This project utilizes openweathermap API for fetching weather details of mentioned location.
 The styling is done using Tailwind CSS 
