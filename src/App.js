@@ -19,13 +19,11 @@ const App = () => {
       await getformattedWeatherData({ ...query, units }).then((data) => {
         setWeather(data);
       });
+      askLocationPermission();
     };
 
     fetchWeather();
   }, [query, units]);
-  useEffect(() => {
-    askLocationPermission();
-  }, [query]);
   const BGURL = "https://cdn.wallpapersafari.com/38/22/skoMHd.jpg";
 
   return (
