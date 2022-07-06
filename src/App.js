@@ -3,9 +3,7 @@ import Forecast from "./components/Forecast";
 import TempDetails from "./components/TempratureDetails";
 import TimeAndLocation from "./components/TimeAndLocation";
 import UserInput from "./components/UserInput";
-import getformattedWeatherData, {
-  askLocationPermission,
-} from "./services/openweather";
+import getformattedWeatherData from "./services/openweather";
 import MapTom from "./services/tomtomMap";
 
 const App = () => {
