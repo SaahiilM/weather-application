@@ -18,10 +18,10 @@ const App = () => {
     const fetchWeather = async () => {
       await getformattedWeatherData({ ...query, units }).then((data) => {
         setWeather(data);
+        askLocationPermission();
       });
     };
 
-    askLocationPermission();
     fetchWeather();
   }, [query, units]);
   const BGURL = "https://cdn.wallpapersafari.com/38/22/skoMHd.jpg";
